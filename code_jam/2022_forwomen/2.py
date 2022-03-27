@@ -17,7 +17,6 @@ def main():
     cur_deliveries = []
 
     for order in orders:
-
         # add delivery
         while k < D and order >= deliveries[k].start:
             cur_deliveries.append(deliveries[k])
@@ -31,19 +30,17 @@ def main():
         # use the delivery which expires soon
         rem = U
         while len(cur_deliveries) > 0 and rem > 0:
-            d = heapq.heappop(cur_deliveries)
-            use = min(rem, d.num)
+            use = min(rem, cur_deliveries[0].num)
             rem -= use
-            d.num -= use
-            if d.num > 0:
-                heapq.heappush(cur_deliveries, d)
+            cur_deliveries[0].num -= use
+            if cur_deliveries[0].num == 0:
+                heapq.heappop(cur_deliveries)
 
         if rem > 0:
             break
         ans += 1
 
         # print('==', [d.num for d in cur_deliveries])
-
     return ans
 
 

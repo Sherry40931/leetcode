@@ -8,18 +8,15 @@ def count_I(i_start, j_start):
 
 
 def main(N):
-    cnts = []
     # 0 1
     # 2 3
-    cnts.append(count_I(0, 0))
-    cnts.append(count_I(0, half))
-    cnts.append(count_I(half, 0))
-    cnts.append(count_I(half, half))
+    cnts = [count_I(0, 0),
+            count_I(0, half),
+            count_I(half, 0),
+            count_I(half, half)]
+
     # goal: a[2] = a[3], a[1] = a[4]
-
-    ans = abs(cnts[1] - cnts[2]) + abs(cnts[0] - cnts[3])
-
-    return ans
+    return abs(cnts[1] - cnts[2]) + abs(cnts[0] - cnts[3])
 
 
 if __name__ == '__main__':
@@ -27,8 +24,6 @@ if __name__ == '__main__':
     for i in range(T):
         half = int(input())
         N = half * 2
-        board = [['' for _ in range(N)] for _ in range(N)]
-        for k in range(N):
-            board[k] = list(input())
+        board = [[v for v in list(input())] for _ in range(N)]
         ans = main(N)
         print(f'Case #{i+1}: {ans}')
