@@ -52,16 +52,13 @@ def print_tree(root: Optional[TreeNode]):
 class Solution:
     # BFS, iterative
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root is None:
-            return
         q = [root]
         while len(q) > 0:
             node = q.pop(0)
+            if not node:
+                continue
             node.left, node.right = node.right, node.left
-            if node.left:
-                q.append(node.left)
-            if node.right:
-                q.append(node.right)
+            q += [node.left, node.right]
         return root
 
 
@@ -73,6 +70,6 @@ class Solution2:
         return root
 
 
-print_tree(Solution2().invertTree(build_tree([4, 2, 7, 1, 3, 6, 9])))
+print_tree(Solution().invertTree(build_tree([4, 2, 7, 1, 3, 6, 9])))
 # [4,7,2,9,6,3,1]
-print_tree(Solution2().invertTree(build_tree([2, 1, 3])))
+print_tree(Solution().invertTree(build_tree([2, 1, 3])))
